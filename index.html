@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GIGIKU SEHAT, SENYUMKU HEBAT! - Mini Dental Show Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Kanvas Confetti untuk Perayaan Jawaban Benar & Pemenang -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- Dekorasi Background Mengambang (Ramah Anak & Ceria) -->
+  <div class="bg-decorations" aria-hidden="true">
+    <span class="floating-item item-1">🦷</span>
+    <span class="floating-item item-2">🍎</span>
+    <span class="floating-item item-3">🥕</span>
+    <span class="floating-item item-4">✨</span>
+    <span class="floating-item item-5">🪥</span>
+    <span class="floating-item item-6">🥛</span>
+    <span class="floating-item item-7">🌟</span>
+    <span class="floating-item item-8">💧</span>
+  </div>
+
+  <!-- Tombol Mengambang Minimalis saat Mode Fullscreen Aktif -->
+  <button
+    type="button"
+    id="btn-exit-fullscreen-float"
+    class="exit-fs-float"
+    title="Keluar Mode Fokus Layar Penuh (Shortcut: F atau Esc)"
+    aria-label="Keluar Mode Layar Penuh"
+  >
+    <span aria-hidden="true">🗗</span>
+    <span>Keluar Fullscreen</span>
+  </button>
+
+  <!-- Top Control Bar (Operator & Presentation Controls) -->
+  <header class="top-utility-bar" aria-label="Kontrol Permainan">
+    <div class="brand-mini" id="btn-logo-home" title="Kembali ke Beranda" role="button" tabindex="0">
+      <span class="brand-mini-icon" aria-hidden="true">🦷</span>
+      <span class="brand-mini-text">MINI DENTAL SHOW</span>
+    </div>
+
+    <div class="utility-actions">
+      <button type="button" id="btn-home-top" class="util-btn" title="Kembali ke Beranda" aria-label="Kembali ke Beranda">
+        <span aria-hidden="true">🏠</span>
+        <span class="util-label">Beranda</span>
+      </button>
+      <button type="button" id="btn-restart-top" class="util-btn" title="Mulai Ulang Permainan" aria-label="Mulai Ulang Permainan">
+        <span aria-hidden="true">🔄</span>
+        <span class="util-label">Ulangi</span>
+      </button>
+      <button type="button" id="btn-sound-toggle" class="util-btn active" title="Suara ON/OFF (Shortcut: M)" aria-label="Suara Aktif" aria-pressed="true">
+        <span id="sound-icon" aria-hidden="true">🔊</span>
+        <span id="sound-label" class="util-label">Suara: ON</span>
+      </button>
+      <button type="button" id="btn-fullscreen" class="util-btn" title="Mode Fokus Layar Penuh Proyektor (Shortcut: F)" aria-label="Mode Layar Penuh">
+        <span id="fullscreen-icon" aria-hidden="true">⛶</span>
+        <span id="fullscreen-label" class="util-label">Layar Penuh</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Kontainer Utama Rasio Panggung Proyektor -->
+  <main class="stage-container" id="stage-container">
+
+    <!-- ==========================================
+         A. START SCREEN (HALAMAN PEMBUKA)
+         ========================================== -->
+    <section id="screen-start" class="screen active" aria-labelledby="start-title">
+      <div class="start-hero">
+        <div class="show-badge">🎪 MINI DENTAL SHOW INTERACTIVE GAME 🎪</div>
+        <h1 id="start-title" class="main-title">GIGIKU SEHAT, SENYUMKU HEBAT!</h1>
+        <h2 class="sub-title">PILIH MAKANANMU, SELAMATKAN GIGIMU!</h2>
+
+        <!-- Karakter Maskot Gigi Lucu + Dokter Gigi Kecil dengan Animasi SVG -->
+        <div class="mascot-stage" aria-hidden="true">
+          <div class="mascot-Sidekick left-sidekick">
+            <div class="sidekick-bubble">Yuk jaga gigimu! 🪥</div>
+            <div class="sidekick-avatar">🧑‍⚕️</div>
+          </div>
+
+          <div class="tooth-mascot-wrapper" id="start-mascot">
+            <div class="mascot-glow"></div>
+            <svg class="tooth-svg" viewBox="0 0 240 250" xmlns="http://www.w3.org/2000/svg">
+              <!-- Jubah Pahlawan Merah/Oranye -->
+              <path class="cape-path" d="M45 110 Q20 175 30 220 Q120 200 210 220 Q220 175 195 110 Z" fill="#FF7A29" />
+              <!-- Mahkota Bintang Kecil -->
+              <polygon class="crown-star" points="120,10 130,30 152,32 135,46 140,67 120,56 100,67 105,46 88,32 110,30" fill="#FFD43B" stroke="#F59F00" stroke-width="4" stroke-linejoin="round"/>
+              <!-- Badan Gigi Putih Bersinar -->
+              <path class="tooth-body" d="M120 48 C88 48 52 38 42 78 C32 118 52 152 60 198 C65 225 85 228 96 198 C104 176 112 166 120 166 C128 166 136 176 144 198 C155 228 175 225 180 198 C188 152 208 118 198 78 C188 38 152 48 120 48 Z" fill="#FFFFFF" stroke="#228BE6" stroke-width="7" stroke-linejoin="round"/>
+              <!-- Kilau Gigi -->
+              <path d="M68 74 Q60 95 66 115" stroke="#E7F5FF" stroke-width="8" stroke-linecap="round" fill="none"/>
+              <circle cx="72" cy="62" r="5" fill="#E7F5FF"/>
+              <!-- Pipi Merona -->
+              <ellipse cx="78" cy="122" rx="12" ry="7" fill="#FFA8A8" opacity="0.75"/>
+              <ellipse cx="162" cy="122" rx="12" ry="7" fill="#FFA8A8" opacity="0.75"/>
+              <!-- Mata Ceria -->
+              <g class="mascot-eyes">
+                <circle cx="88" cy="102" r="10" fill="#183153"/>
+                <circle cx="85" cy="98" r="3.5" fill="#FFFFFF"/>
+                <circle cx="152" cy="102" r="10" fill="#183153"/>
+                <circle cx="149" cy="98" r="3.5" fill="#FFFFFF"/>
+              </g>
+              <!-- Senyum Lebar -->
+              <path d="M95 122 Q120 148 145 122" stroke="#183153" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+              <path d="M106 131 Q120 142 134 131" fill="#FF6B6B"/>
+              <!-- Tangan Melambai memegang Sikat Gigi -->
+              <path class="mascot-arm-left" d="M44 125 Q18 105 24 82" stroke="#228BE6" stroke-width="8" stroke-linecap="round" fill="none"/>
+              <path class="mascot-arm-right" d="M196 125 Q222 105 216 82" stroke="#228BE6" stroke-width="8" stroke-linecap="round" fill="none"/>
+              <!-- Sikat Gigi di Tangan Kanan -->
+              <g class="mascot-brush">
+                <rect x="208" y="45" width="8" height="48" rx="4" transform="rotate(18 212 69)" fill="#20C997" stroke="#0CA678" stroke-width="2"/>
+                <rect x="198" y="42" width="14" height="18" rx="3" transform="rotate(18 205 51)" fill="#FFFFFF" stroke="#228BE6" stroke-width="2"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="mascot-Sidekick right-sidekick">
+            <div class="sidekick-bubble">Pilih makanan sehat! 🍎</div>
+            <div class="sidekick-avatar">🦷✨</div>
+          </div>
+        </div>
+
+        <!-- Tombol Aksi Utama -->
+        <div class="start-cta-group">
+          <button type="button" id="btn-start-game" class="btn btn-primary btn-xl pulse-btn">
+            <span class="btn-icon" aria-hidden="true">🚀</span>
+            <span>MULAI BERMAIN</span>
+          </button>
+          <button type="button" id="btn-how-to-play" class="btn btn-secondary btn-xl">
+            <span class="btn-icon" aria-hidden="true">📖</span>
+            <span>CARA BERMAIN</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         B. HALAMAN CARA BERMAIN
+         ========================================== -->
+    <section id="screen-howto" class="screen" aria-labelledby="howto-title">
+      <div class="panel-card howto-panel">
+        <div class="panel-header">
+          <h2 id="howto-title" class="section-title">🎯 CARA BERMAIN 🎯</h2>
+          <p class="section-subtitle">Ikuti 6 langkah seru untuk menjadi Pahlawan Gigi Sehat!</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-emoji" aria-hidden="true">🃏</div>
+            <p class="step-text">Pemain akan mendapatkan <strong>kartu makanan atau minuman</strong>.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-emoji" aria-hidden="true">🤔</div>
+            <p class="step-text">Pilih apakah makanan tersebut termasuk <strong>DO</strong> atau <strong>DON'T</strong>.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-emoji" aria-hidden="true">👆</div>
+            <p class="step-text"><strong>Klik tombol</strong> atau <strong>seret kartu</strong> ke kategori yang tepat.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-emoji" aria-hidden="true">⭐</div>
+            <p class="step-text">Jawaban benar mendapatkan <strong>+10 poin</strong>!</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-emoji" aria-hidden="true">💡</div>
+            <p class="step-text">Jawaban salah akan mendapatkan <strong>penjelasan edukatif</strong>.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">6</div>
+            <div class="step-emoji" aria-hidden="true">🏆</div>
+            <p class="step-text">Selesaikan semua pertanyaan untuk gelar <strong>Pahlawan Gigi Sehat!</strong></p>
+          </div>
+        </div>
+
+        <div class="panel-footer">
+          <button type="button" id="btn-back-start" class="btn btn-outline btn-lg">
+            <span>⬅️ KEMBALI</span>
+          </button>
+          <button type="button" id="btn-howto-ready" class="btn btn-primary btn-xl pulse-btn">
+            <span class="btn-icon" aria-hidden="true">👍</span>
+            <span>MENGERTI, MULAI GAME!</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         C. HALAMAN PEMILIHAN PEMAIN (DINAMIS 1-3 PEMAIN, DEFAULT 1)
+         ========================================== -->
+    <section id="screen-players" class="screen" aria-labelledby="players-title">
+      <div class="panel-card players-panel">
+        <div class="panel-header">
+          <h2 id="players-title" class="section-title">🌟 PENGATURAN PEMAIN 🌟</h2>
+          <p class="section-subtitle" id="players-subtitle">Pilih jumlah peserta dan masukkan nama pemain!</p>
+
+          <!-- Pemilih Jumlah Pemain (Default: 1 Pemain) -->
+          <div class="player-count-selector" role="group" aria-label="Pilih Jumlah Pemain">
+            <span class="count-selector-label">JUMLAH PEMAIN:</span>
+            <div class="count-btn-group">
+              <button type="button" class="count-btn active" data-count="1">1 PEMAIN</button>
+              <button type="button" class="count-btn" data-count="2">2 PEMAIN</button>
+              <button type="button" class="count-btn" data-count="3">3 PEMAIN</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="players-grid count-1" id="players-setup-grid">
+          <!-- Pemain 1 -->
+          <div class="player-setup-card player-theme-1" id="setup-card-0">
+            <div class="player-badge">GILIRAN 1</div>
+            <div class="player-avatar-circle" id="avatar-preview-0" aria-hidden="true">🧒</div>
+            <div class="avatar-picker" role="group" aria-label="Pilih Avatar Pemain 1">
+              <button type="button" class="avatar-opt active" data-player="0" data-avatar="🧒">🧒</button>
+              <button type="button" class="avatar-opt" data-player="0" data-avatar="👧">👧</button>
+              <button type="button" class="avatar-opt" data-player="0" data-avatar="🦸‍♂️">🦸‍♂️</button>
+              <button type="button" class="avatar-opt" data-player="0" data-avatar="🧕">🧕</button>
+            </div>
+            <label for="input-player-0" class="player-label">NAMA PEMAIN 1</label>
+            <input
+              type="text"
+              id="input-player-0"
+              class="player-input"
+              placeholder="PEMAIN 1"
+              value="PEMAIN 1"
+              maxlength="18"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Pemain 2 -->
+          <div class="player-setup-card player-theme-2 hidden-card" id="setup-card-1">
+            <div class="player-badge">GILIRAN 2</div>
+            <div class="player-avatar-circle" id="avatar-preview-1" aria-hidden="true">👧</div>
+            <div class="avatar-picker" role="group" aria-label="Pilih Avatar Pemain 2">
+              <button type="button" class="avatar-opt" data-player="1" data-avatar="🧒">🧒</button>
+              <button type="button" class="avatar-opt active" data-player="1" data-avatar="👧">👧</button>
+              <button type="button" class="avatar-opt" data-player="1" data-avatar="🦸‍♀️">🦸‍♀️</button>
+              <button type="button" class="avatar-opt" data-player="1" data-avatar="👦">👦</button>
+            </div>
+            <label for="input-player-1" class="player-label">NAMA PEMAIN 2</label>
+            <input
+              type="text"
+              id="input-player-1"
+              class="player-input"
+              placeholder="PEMAIN 2"
+              value="PEMAIN 2"
+              maxlength="18"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Pemain 3 -->
+          <div class="player-setup-card player-theme-3 hidden-card" id="setup-card-2">
+            <div class="player-badge">GILIRAN 3</div>
+            <div class="player-avatar-circle" id="avatar-preview-2" aria-hidden="true">🦸</div>
+            <div class="avatar-picker" role="group" aria-label="Pilih Avatar Pemain 3">
+              <button type="button" class="avatar-opt" data-player="2" data-avatar="🧒">🧒</button>
+              <button type="button" class="avatar-opt" data-player="2" data-avatar="👧">👧</button>
+              <button type="button" class="avatar-opt active" data-player="2" data-avatar="🦸">🦸</button>
+              <button type="button" class="avatar-opt" data-player="2" data-avatar="🧑">🧑</button>
+            </div>
+            <label for="input-player-2" class="player-label">NAMA PEMAIN 3</label>
+            <input
+              type="text"
+              id="input-player-2"
+              class="player-input"
+              placeholder="PEMAIN 3"
+              value="PEMAIN 3"
+              maxlength="18"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="panel-footer">
+          <button type="button" id="btn-players-back" class="btn btn-outline btn-lg">
+            <span>⬅️ KEMBALI</span>
+          </button>
+          <button type="button" id="btn-start-round-1" class="btn btn-primary btn-xl pulse-btn">
+            <span class="btn-icon" aria-hidden="true">🎬</span>
+            <span id="btn-start-round-label">MULAI PERMAINAN</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         D. HALAMAN GAME UTAMA
+         ========================================== -->
+    <section id="screen-game" class="screen" aria-label="Area Permainan Utama">
+      <!-- HEADER GAME (Otomatis disembunyikan saat Mode Fokus Fullscreen) -->
+      <div class="game-hud">
+        <div class="hud-logo">
+          <span class="hud-logo-icon" aria-hidden="true">🦷</span>
+          <div class="hud-logo-text">
+            <strong>Dental Game</strong>
+            <span id="hud-overall-progress">Kartu 1 / 12</span>
+          </div>
+        </div>
+
+        <div class="hud-active-player" id="hud-player-pill">
+          <span class="hud-avatar" id="hud-player-avatar" aria-hidden="true">🧒</span>
+          <div class="hud-player-meta">
+            <span class="hud-meta-label">PEMAIN AKTIF</span>
+            <strong class="hud-player-name" id="hud-player-name">PEMAIN 1</strong>
+          </div>
+        </div>
+
+        <div class="hud-round">
+          <span class="hud-meta-label">INDIKATOR RONDE</span>
+          <strong class="hud-round-value" id="hud-round-text">RONDE 1 • SOAL 1/4</strong>
+          <div class="progress-dots" id="hud-round-dots" aria-hidden="true">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        <div class="hud-score">
+          <span class="hud-meta-label">SKOR SEMENTARA</span>
+          <strong class="hud-score-value" id="hud-score-value">0 POIN</strong>
+        </div>
+      </div>
+
+      <!-- PERTANYAAN PROMPT -->
+      <div class="question-banner">
+        <p class="question-prompt">MENURUT KAMU, INI TERMASUK <span class="badge-do-inline">DO</span> ATAU <span class="badge-dont-inline">DON'T</span>?</p>
+      </div>
+
+      <!-- AREA ARENA PERMAINAN (KIRI: DO | TENGAH: KARTU | KANAN: DON'T) -->
+      <div class="game-arena">
+        <!-- PILIHAN 1: DO -->
+        <button
+          type="button"
+          id="zone-do"
+          class="choice-zone zone-do"
+          aria-label="Pilih DO: Pilihan Baik Untuk Gigi"
+        >
+          <div class="zone-icon-circle" aria-hidden="true">✅</div>
+          <div class="zone-title">DO</div>
+          <div class="zone-subtitle">PILIHAN BAIK UNTUK GIGI</div>
+          <div class="zone-hint">Klik atau Seret Kartu ke Sini</div>
+        </button>
+
+        <!-- AREA TENGAH: KARTU MAKANAN -->
+        <div class="card-stage" id="card-stage">
+          <div
+            id="food-card"
+            class="food-card"
+            role="group"
+            aria-label="Kartu Makanan"
+            tabindex="0"
+          >
+            <div class="card-top-tag" id="card-number-tag">KARTU #1</div>
+            <div class="card-illustration" id="card-emoji" aria-hidden="true">🍎</div>
+            <h3 class="card-food-name" id="card-name">Apel</h3>
+            <div class="card-drag-tip">
+              <span aria-hidden="true">🖐️</span> Seret kartu atau klik tombol di samping!
+            </div>
+          </div>
+        </div>
+
+        <!-- PILIHAN 2: DON'T -->
+        <button
+          type="button"
+          id="zone-dont"
+          class="choice-zone zone-dont"
+          aria-label="Pilih DON'T: Perlu Dibatasi"
+        >
+          <div class="zone-icon-circle" aria-hidden="true">❌</div>
+          <div class="zone-title">DON'T</div>
+          <div class="zone-subtitle">PERLU DIBATASI</div>
+          <div class="zone-hint">Klik atau Seret Kartu ke Sini</div>
+        </button>
+      </div>
+
+      <!-- MINI SCOREBOARD BAR (Otomatis disembunyikan saat Mode Fokus Fullscreen) -->
+      <div class="live-scoreboard" id="live-scoreboard" aria-label="Papan Skor Sementara">
+        <!-- Diisi secara dinamis sesuai jumlah pemain -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         G. HALAMAN HASIL AKHIR
+         ========================================== -->
+    <section id="screen-results" class="screen" aria-labelledby="results-title">
+      <div class="panel-card results-panel">
+        <div class="results-header">
+          <div class="trophy-banner" aria-hidden="true">🏆✨🦷✨🏆</div>
+          <div class="hero-grand-badge">GELAR KEHORMATAN: PAHLAWAN GIGI SEHAT</div>
+          <h2 id="results-title" class="section-title">HASIL AKHIR PERMAINAN!</h2>
+        </div>
+
+        <!-- Podium / Peringkat Pemain -->
+        <div class="podium-grid" id="podium-grid">
+          <!-- Diisi secara dinamis oleh script.js -->
+        </div>
+
+        <!-- Pesan Penutup Edukatif -->
+        <div class="closing-message-box">
+          <div class="closing-mascot" aria-hidden="true">🦷🪥</div>
+          <p class="closing-text">
+            "SELAMAT! KAMU SUDAH BELAJAR CARA MEMILIH MAKANAN YANG BAIK UNTUK GIGI. JANGAN LUPA SIKAT GIGI 2 KALI SEHARI DAN BATASI MAKANAN MANIS!"
+          </p>
+        </div>
+
+        <!-- Tombol Aksi Akhir -->
+        <div class="panel-footer results-footer">
+          <button type="button" id="btn-play-again" class="btn btn-primary btn-xl pulse-btn">
+            <span class="btn-icon" aria-hidden="true">🔄</span>
+            <span>MAIN LAGI</span>
+          </button>
+          <button type="button" id="btn-home-end" class="btn btn-secondary btn-xl">
+            <span class="btn-icon" aria-hidden="true">🏠</span>
+            <span>KEMBALI KE BERANDA</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         MODAL FEEDBACK JAWABAN (BENAR / SALAH)
+         ========================================== -->
+    <div id="feedback-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="feedback-headline">
+      <div class="modal-card" id="feedback-card">
+        <div class="feedback-badge-icon" id="feedback-icon" aria-hidden="true">🎉</div>
+        <h3 class="feedback-headline" id="feedback-headline">HEBAT! JAWABAN KAMU BENAR!</h3>
+        <div class="feedback-points-pill" id="feedback-points">+10 POIN</div>
+
+        <div class="feedback-food-summary">
+          <span class="feedback-food-emoji" id="feedback-food-emoji" aria-hidden="true">🍎</span>
+          <div class="feedback-food-info">
+            <strong id="feedback-food-name">Apel</strong>
+            <span id="feedback-category-tag" class="category-pill pill-do">DO • PILIHAN BAIK UNTUK GIGI</span>
+          </div>
+        </div>
+
+        <p class="feedback-explanation" id="feedback-explanation">
+          Buah utuh merupakan pilihan yang baik untuk tubuh dan gigi. Yuk, makan buah!
+        </p>
+
+        <button type="button" id="btn-next-question" class="btn btn-primary btn-xl pulse-btn">
+          <span>LANJUTKAN</span>
+          <span class="btn-icon" aria-hidden="true">➡️</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL TRANSISI PERGANTIAN PEMAIN / RONDE
+         ========================================== -->
+    <div id="turn-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="turn-headline">
+      <div class="modal-card turn-card">
+        <div class="turn-round-pill" id="turn-round-badge">RONDE BERIKUTNYA</div>
+        <div class="turn-avatar-big" id="turn-avatar" aria-hidden="true">👧</div>
+        <h3 class="turn-headline" id="turn-headline">GILIRAN PEMAIN 2!</h3>
+        <p class="turn-subtext" id="turn-subtext">
+          Ayo naik ke panggung! Bersiaplah menjawab 4 kartu makanan berikutnya!
+        </p>
+        <button type="button" id="btn-start-turn" class="btn btn-primary btn-xl pulse-btn">
+          <span class="btn-icon" aria-hidden="true">🎤</span>
+          <span id="btn-start-turn-label">MULAI GILIRAN!</span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
