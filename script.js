@@ -133,22 +133,6 @@
         "Ikan mengandung vitamin D dan fosfor tinggi yang penting agar tubuh dapat menyerap kalsium secara optimal untuk gigi yang kuat."
     },
     {
-      id: 16,
-      name: "Yogurt tawar",
-      emoji: "🥣",
-      answer: "DO",
-      explanation:
-        "Yogurt tanpa tambahan gula mengandung kalsium, protein, dan bakteri baik (probiotik) yang mendukung kesehatan gusi dan gigi."
-    },
-    // {
-    //   id: 17,
-    //   name: "Seledri",
-    //   emoji: "🥬",
-    //   answer: "DO",
-    //   explanation:
-    //     "Sayuran berserat dan renyah seperti seledri membutuhkan kunyahan ekstra yang merangsang air liur untuk membersihkan sisa makanan."
-    // },
-    {
       id: 18,
       name: "Stroberi segar",
       emoji: "🍓",
@@ -156,14 +140,6 @@
       explanation:
         "Buah stroberi segar kaya akan vitamin C dan antioksidan yang membantu pembentukan kolagen agar gusi tetap sehat dan kuat."
     },
-    // {
-    //   id: 19,
-    //   name: "Kacang almond",
-    //   emoji: "🥜",
-    //   answer: "DO",
-    //   explanation:
-    //     "Kacang almond rendah gula serta kaya kalsium dan protein yang baik untuk memperkuat struktur gigi. Kunyah perlahan ya!"
-    // },
     {
       id: 20,
       name: "Timun segar",
@@ -206,7 +182,7 @@
     },
     {
       id: 25,
-      name: "Biskuit krim manis",
+      name: "Biskuit manis",
       emoji: "🍪",
       answer: "DONT",
       explanation:
@@ -214,7 +190,7 @@
     },
     {
       id: 26,
-      name: "Minuman boba manis",
+      name: "Minuman boba",
       emoji: "🧋",
       answer: "DONT",
       explanation:
@@ -237,16 +213,8 @@
         "Sirup manis mengandung kadar gula tinggi yang melapisi permukaan gigi dan mempercepat terbentuknya plak serta asam."
     },
     {
-      id: 29,
-      name: "Karamel lengket",
-      emoji: "🍮",
-      answer: "DONT",
-      explanation:
-        "Karamel memiliki tekstur sangat lengket dan tinggi gula sehingga sulit dibersihkan oleh air liur dan bertahan lama di permukaan gigi."
-    },
-    {
       id: 30,
-      name: "Roti selai cokelat",
+      name: "Roti cokelat",
       emoji: "🥐",
       answer: "DONT",
       explanation:
@@ -608,7 +576,11 @@
     soundIcon: document.getElementById("sound-icon"),
     soundLabel: document.getElementById("sound-label"),
     btnFullscreen: document.getElementById("btn-fullscreen"),
-    btnExitFullscreenFloat: document.getElementById("btn-exit-fullscreen-float")
+    btnExitFullscreenFloat: document.getElementById("btn-exit-fullscreen-float"),
+    fsStatusFloat: document.getElementById("fs-status-float"),
+    fsStatusCard: document.getElementById("fs-status-card"),
+    fsStatusPlayer: document.getElementById("fs-status-player"),
+    fsStatusScore: document.getElementById("fs-status-score")
   };
 
   /* ==========================================================================
@@ -646,8 +618,10 @@
     if (screens[screenKey]) {
       screens[screenKey].classList.add("active");
     }
+    document.body.setAttribute("data-screen", screenKey);
     dom.feedbackModal.classList.add("hidden");
     dom.turnModal.classList.add("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function getQuestionsPerPlayer(playerIndex = state.currentPlayerIndex) {
@@ -804,6 +778,11 @@
     }
 
     dom.hudScoreValue.textContent = `${activePlayer.score} POIN`;
+    if (dom.fsStatusCard) {
+      dom.fsStatusCard.textContent = `Kartu ${state.globalQuestionIndex + 1}/${state.deck.length}`;
+      dom.fsStatusPlayer.textContent = `${activePlayer.avatar} ${activePlayer.name}`;
+      dom.fsStatusScore.textContent = `${activePlayer.score} Poin`;
+    }
 
     renderProgressDots();
     updateLiveScoreboard();
@@ -870,6 +849,9 @@
     }
 
     dom.hudScoreValue.textContent = `${activePlayer.score} POIN`;
+    if (dom.fsStatusScore) {
+      dom.fsStatusScore.textContent = `${activePlayer.score} Poin`;
+    }
     updateLiveScoreboard();
 
     setTimeout(() => {
@@ -1059,11 +1041,12 @@
       dom.foodCard.style.transform = `translate(${dx}px, ${dy}px) rotate(${rotate}deg)`;
 
       currentHoverZone = checkZoneOverlap(e.clientX, e.clientY);
+      const swipeThreshold = Math.min(130, Math.max(65, window.innerWidth * 0.2));
       if (!currentHoverZone) {
-        if (dx < -130) {
+        if (dx < -swipeThreshold) {
           dom.zoneDo.classList.add("drag-over");
           currentHoverZone = "DO";
-        } else if (dx > 130) {
+        } else if (dx > swipeThreshold) {
           dom.zoneDont.classList.add("drag-over");
           currentHoverZone = "DONT";
         }
@@ -1219,9 +1202,17 @@
     });
 
     // Interaksi Maskot di Halaman Depan
-    document.getElementById("start-mascot").addEventListener("click", () => {
+    const startMascot = document.getElementById("start-mascot");
+    startMascot.addEventListener("click", () => {
       SoundFX.correct();
       ConfettiFX.burst(40);
+    });
+    startMascot.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        SoundFX.correct();
+        ConfettiFX.burst(40);
+      }
     });
 
     // Pemilih Avatar Pemain
@@ -1357,6 +1348,7 @@
      13. INISIALISASI APLIKASI
      ========================================================================== */
   function init() {
+    document.body.setAttribute("data-screen", "start");
     setPlayerCount(1); // Default adalah 1 pemain
     updateMusicUI();
     updateSoundUI();

@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0ea5e9" />
   <title>GIGIKU SEHAT, SENYUMKU HEBAT! - Mini Dental Show Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -25,7 +26,14 @@
     <span class="floating-item item-8">💧</span>
   </div>
 
-  <!-- Tombol Mengambang Minimalis saat Mode Fullscreen Aktif -->
+  <!-- Info & Tombol Mengambang Minimalis saat Mode Fullscreen Aktif -->
+  <div id="fs-status-float" class="fs-status-float" aria-live="polite">
+    <span id="fs-status-card" class="fs-status-badge">Kartu 1/10</span>
+    <span class="fs-status-sep" aria-hidden="true">•</span>
+    <span id="fs-status-player">🧒 PEMAIN 1</span>
+    <span id="fs-status-score" class="fs-status-pts">0 Poin</span>
+  </div>
+
   <button
     type="button"
     id="btn-exit-fullscreen-float"
@@ -87,8 +95,9 @@
             <div class="sidekick-avatar">🧑‍⚕️</div>
           </div>
 
-          <div class="tooth-mascot-wrapper" id="start-mascot">
+          <div class="tooth-mascot-wrapper" id="start-mascot" role="button" tabindex="0" aria-label="Maskot Gigi Pahlawan - Klik untuk kejutan!">
             <div class="mascot-glow"></div>
+            <span class="mascot-tap-badge">✨ Klik Aku!</span>
             <svg class="tooth-svg" viewBox="0 0 240 250" xmlns="http://www.w3.org/2000/svg">
               <!-- Jubah Pahlawan Merah/Oranye -->
               <path class="cape-path" d="M45 110 Q20 175 30 220 Q120 200 210 220 Q220 175 195 110 Z" fill="#FF7A29" />
@@ -369,10 +378,16 @@
             tabindex="0"
           >
             <div class="card-top-tag" id="card-number-tag">KARTU #1</div>
-            <div class="card-illustration" id="card-emoji" aria-hidden="true">🍎</div>
+            <div class="card-illustration-wrap">
+              <div class="card-illustration" id="card-emoji" aria-hidden="true">🍎</div>
+            </div>
             <h3 class="card-food-name" id="card-name">Apel</h3>
+            <div class="card-direction-cues" aria-hidden="true">
+              <span class="cue-pill cue-left">⬅️ Gigi Senang</span>
+              <span class="cue-pill cue-right">Gigi Sedih ➡️</span>
+            </div>
             <div class="card-drag-tip">
-              <span aria-hidden="true">🖐️</span> Seret kartu atau klik tombol di samping!
+              <span aria-hidden="true">🖐️</span> Seret kartu atau klik pilihan!
             </div>
           </div>
         </div>
