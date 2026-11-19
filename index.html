@@ -162,7 +162,7 @@
           <div class="step-card">
             <div class="step-num">2</div>
             <div class="step-emoji" aria-hidden="true">🤔</div>
-            <p class="step-text">Pilih apakah makanan tersebut termasuk <strong>DO</strong> atau <strong>DON'T</strong>.</p>
+            <p class="step-text">Pilih apakah makanan tersebut membuat <strong>Gigi Senang</strong> atau <strong>Gigi Sedih</strong>.</p>
           </div>
           <div class="step-card">
             <div class="step-num">3</div>
@@ -339,20 +339,22 @@
 
       <!-- PERTANYAAN PROMPT -->
       <div class="question-banner">
-        <p class="question-prompt">MENURUT KAMU, INI TERMASUK <span class="badge-do-inline">DO</span> ATAU <span class="badge-dont-inline">DON'T</span>?</p>
+        <p class="question-prompt">MENURUT KAMU, MAKANAN INI MEMBUAT <span class="badge-do-inline">GIGI SENANG</span> ATAU <span class="badge-dont-inline">GIGI SEDIH</span>?</p>
       </div>
 
-      <!-- AREA ARENA PERMAINAN (KIRI: DO | TENGAH: KARTU | KANAN: DON'T) -->
+      <!-- AREA ARENA PERMAINAN (KIRI: GIGI SENANG | TENGAH: KARTU | KANAN: GIGI SEDIH) -->
       <div class="game-arena">
-        <!-- PILIHAN 1: DO -->
+        <!-- PILIHAN 1: GIGI SENANG -->
         <button
           type="button"
           id="zone-do"
           class="choice-zone zone-do"
-          aria-label="Pilih DO: Pilihan Baik Untuk Gigi"
+          aria-label="Pilih Gigi Senang: Pilihan Baik Untuk Gigi"
         >
-          <div class="zone-icon-circle" aria-hidden="true">✅</div>
-          <div class="zone-title">DO</div>
+          <div class="zone-icon-circle" aria-hidden="true">
+            <img src="assets/gigi-senang.svg" alt="Gigi Senang" class="zone-tooth-img" />
+          </div>
+          <div class="zone-title">GIGI SENANG</div>
           <div class="zone-subtitle">PILIHAN BAIK UNTUK GIGI</div>
           <div class="zone-hint">Klik atau Seret Kartu ke Sini</div>
         </button>
@@ -375,15 +377,17 @@
           </div>
         </div>
 
-        <!-- PILIHAN 2: DON'T -->
+        <!-- PILIHAN 2: GIGI SEDIH -->
         <button
           type="button"
           id="zone-dont"
           class="choice-zone zone-dont"
-          aria-label="Pilih DON'T: Perlu Dibatasi"
+          aria-label="Pilih Gigi Sedih: Perlu Dibatasi"
         >
-          <div class="zone-icon-circle" aria-hidden="true">❌</div>
-          <div class="zone-title">DON'T</div>
+          <div class="zone-icon-circle" aria-hidden="true">
+            <img src="assets/gigi-sedih.svg" alt="Gigi Sedih" class="zone-tooth-img" />
+          </div>
+          <div class="zone-title">GIGI SEDIH</div>
           <div class="zone-subtitle">PERLU DIBATASI</div>
           <div class="zone-hint">Klik atau Seret Kartu ke Sini</div>
         </button>
@@ -446,7 +450,7 @@
           <span class="feedback-food-emoji" id="feedback-food-emoji" aria-hidden="true">🍎</span>
           <div class="feedback-food-info">
             <strong id="feedback-food-name">Apel</strong>
-            <span id="feedback-category-tag" class="category-pill pill-do">DO • PILIHAN BAIK UNTUK GIGI</span>
+            <span id="feedback-category-tag" class="category-pill pill-do">GIGI SENANG • PILIHAN BAIK UNTUK GIGI</span>
           </div>
         </div>
 

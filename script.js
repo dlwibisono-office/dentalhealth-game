@@ -810,7 +810,13 @@
 
     // Reset posisi dan animasi kartu makanan
     dom.foodCard.style.transform = "";
-    dom.foodCard.classList.remove("card-fly-left", "card-fly-right", "card-pop-in");
+    dom.foodCard.classList.remove(
+      "card-fly-left",
+      "card-fly-right",
+      "card-pop-in",
+      "card-hint-correct",
+      "card-hint-wrong"
+    );
     void dom.foodCard.offsetWidth;
 
     dom.cardNumberTag.textContent = `KARTU #${state.globalQuestionIndex + 1} DARI ${state.deck.length}`;
@@ -825,6 +831,20 @@
   /* ==========================================================================
      8. EVALUASI JAWABAN & MODAL FEEDBACK EDUKATIF
      ========================================================================== */
+  function updateCardDirectionHint(targetCategory) {
+    dom.foodCard.classList.remove("card-hint-correct", "card-hint-wrong");
+    if (!targetCategory) return;
+
+    const currentCard = state.deck[state.globalQuestionIndex];
+    if (!currentCard) return;
+
+    if (targetCategory === currentCard.answer) {
+      dom.foodCard.classList.add("card-hint-correct");
+    } else {
+      dom.foodCard.classList.add("card-hint-wrong");
+    }
+  }
+
   function submitAnswer(chosenCategory) {
     if (!state.isAnsweringAllowed) return;
     state.isAnsweringAllowed = false;
@@ -833,6 +853,7 @@
     const activePlayer = state.players[state.currentPlayerIndex];
     const isCorrect = chosenCategory === currentCard.answer;
 
+    updateCardDirectionHint(chosenCategory);
     dom.foodCard.classList.remove("card-pop-in");
     if (chosenCategory === "DO") {
       dom.foodCard.classList.add("card-fly-left");
@@ -874,10 +895,12 @@
     dom.feedbackFoodName.textContent = card.name;
 
     if (card.answer === "DO") {
-      dom.feedbackCategoryTag.textContent = "✅ DO • PILIHAN BAIK UNTUK GIGI";
+      dom.feedbackCategoryTag.innerHTML =
+        '<img src="assets/gigi-senang.svg" alt="" class="pill-tooth-icon" /> GIGI SENANG • PILIHAN BAIK UNTUK GIGI';
       dom.feedbackCategoryTag.className = "category-pill pill-do";
     } else {
-      dom.feedbackCategoryTag.textContent = "❌ DON'T • PERLU DIBATASI";
+      dom.feedbackCategoryTag.innerHTML =
+        '<img src="assets/gigi-sedih.svg" alt="" class="pill-tooth-icon" /> GIGI SEDIH • PERLU DIBATASI';
       dom.feedbackCategoryTag.className = "category-pill pill-dont";
     }
 
@@ -979,21 +1002,35 @@
     let startY = 0;
     let currentHoverZone = null;
 
+    function getOverlapArea(rectA, rectB) {
+      const xOverlap = Math.max(0, Math.min(rectA.right, rectB.right) - Math.max(rectA.left, rectB.left));
+      const yOverlap = Math.max(0, Math.min(rectA.bottom, rectB.bottom) - Math.max(rectA.top, rectB.top));
+      return xOverlap * yOverlap;
+    }
+
     function checkZoneOverlap(clientX, clientY) {
       const doRect = dom.zoneDo.getBoundingClientRect();
       const dontRect = dom.zoneDont.getBoundingClientRect();
+      const cardRect = dom.foodCard.getBoundingClientRect();
 
-      const inDo =
+      const pointerInDo =
         clientX >= doRect.left &&
         clientX <= doRect.right &&
         clientY >= doRect.top &&
         clientY <= doRect.bottom;
 
-      const inDont =
+      const pointerInDont =
         clientX >= dontRect.left &&
         clientX <= dontRect.right &&
         clientY >= dontRect.top &&
         clientY <= dontRect.bottom;
+
+      const cardArea = Math.max(1, cardRect.width * cardRect.height);
+      const doOverlapRatio = getOverlapArea(cardRect, doRect) / cardArea;
+      const dontOverlapRatio = getOverlapArea(cardRect, dontRect) / cardArea;
+
+      const inDo = pointerInDo || (doOverlapRatio > 0.12 && doOverlapRatio >= dontOverlapRatio);
+      const inDont = pointerInDont || (dontOverlapRatio > 0.12 && dontOverlapRatio > doOverlapRatio);
 
       dom.zoneDo.classList.toggle("drag-over", inDo);
       dom.zoneDont.classList.toggle("drag-over", inDont);
@@ -1031,6 +1068,17 @@
           currentHoverZone = "DONT";
         }
       }
+
+      // Berikan efek warna pinggiran kartu (hijau = benar, merah = salah) saat mengarah ke salah satu pilihan
+      let directionCategory = currentHoverZone;
+      if (!directionCategory) {
+        if (dx < -30) {
+          directionCategory = "DO";
+        } else if (dx > 30) {
+          directionCategory = "DONT";
+        }
+      }
+      updateCardDirectionHint(directionCategory);
     });
 
     function finishDrag() {
@@ -1044,12 +1092,35 @@
         submitAnswer(currentHoverZone);
       } else {
         dom.foodCard.style.transform = "";
+        updateCardDirectionHint(null);
       }
       currentHoverZone = null;
     }
 
     dom.foodCard.addEventListener("pointerup", finishDrag);
     dom.foodCard.addEventListener("pointercancel", finishDrag);
+
+    // Efek pinggiran kartu saat kursor diarahkan (hover) ke tombol Gigi Senang / Gigi Sedih
+    dom.zoneDo.addEventListener("pointerenter", () => {
+      if (!isDragging && state.isAnsweringAllowed) {
+        updateCardDirectionHint("DO");
+      }
+    });
+    dom.zoneDo.addEventListener("pointerleave", () => {
+      if (!isDragging && state.isAnsweringAllowed) {
+        updateCardDirectionHint(null);
+      }
+    });
+    dom.zoneDont.addEventListener("pointerenter", () => {
+      if (!isDragging && state.isAnsweringAllowed) {
+        updateCardDirectionHint("DONT");
+      }
+    });
+    dom.zoneDont.addEventListener("pointerleave", () => {
+      if (!isDragging && state.isAnsweringAllowed) {
+        updateCardDirectionHint(null);
+      }
+    });
   }
 
   /* ==========================================================================

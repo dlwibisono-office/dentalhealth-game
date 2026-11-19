@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <radialGradient id="sadGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDBA74" stop-opacity="0.65" />
+      <stop offset="65%" stop-color="#FFEDD5" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#FFEDD5" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="sadToothBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB" />
+      <stop offset="100%" stop-color="#FEF3C7" />
+    </linearGradient>
+    <filter id="sadShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#C2410C" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- Aura Oranye/Merah Peringatan -->
+  <circle cx="120" cy="120" r="108" fill="url(#sadGlow)" />
+
+  <!-- Awan Asam / Bakteri Kecil di Sekitar Gigi -->
+  <g opacity="0.85">
+    <!-- Simbol Pusing / Sakit Kiri Atas -->
+    <path d="M32 48 L44 36 M32 36 L44 48" stroke="#EA580C" stroke-width="4" stroke-linecap="round" />
+    <!-- Tetesan Gula Lengket Kanan Atas -->
+    <circle cx="202" cy="48" r="10" fill="#FB923C" opacity="0.5" />
+    <circle cx="212" cy="64" r="6" fill="#F97316" opacity="0.6" />
+    <circle cx="28" cy="158" r="8" fill="#FB923C" opacity="0.5" />
+  </g>
+
+  <!-- Grup Utama Gigi Sedih -->
+  <g filter="url(#sadShadow)">
+    <!-- Tangan Lemas Memegang Pipi yang Sakit -->
+    <path d="M48 134 Q24 144 36 164" stroke="#EA580C" stroke-width="7.5" stroke-linecap="round" fill="none" />
+    <circle cx="37" cy="166" r="7" fill="#FEF3C7" stroke="#EA580C" stroke-width="4" />
+
+    <path d="M192 134 Q216 144 204 164" stroke="#EA580C" stroke-width="7.5" stroke-linecap="round" fill="none" />
+    <circle cx="203" cy="166" r="7" fill="#FEF3C7" stroke="#EA580C" stroke-width="4" />
+
+    <!-- Badan Gigi Sedih (Agak Kekuningan karena Plak/Gula) -->
+    <path
+      d="M120 44
+         C86 44 48 34 38 76
+         C28 118 50 152 58 198
+         C63 224 84 226 95 196
+         C103 174 111 164 120 164
+         C129 164 137 174 145 196
+         C156 226 177 224 182 198
+         C190 152 212 118 202 76
+         C192 34 154 44 120 44 Z"
+      fill="url(#sadToothBody)"
+      stroke="#EA580C"
+      stroke-width="7"
+      stroke-linejoin="round"
+    />
+
+    <!-- Lubang Gigi (Karies) & Retakan di Bagian Atas Kanan -->
+    <path
+      d="M148 45 C154 58 168 62 178 55 C185 65 174 78 160 76 C148 74 142 62 148 45 Z"
+      fill="#78350F"
+      stroke="#451A03"
+      stroke-width="3"
+      stroke-linejoin="round"
+    />
+    <!-- Garis Retakan Kecil dari Lubang Gigi -->
+    <path d="M156 76 L150 90 L158 96" stroke="#78350F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <path d="M174 71 L184 82" stroke="#78350F" stroke-width="3" stroke-linecap="round" fill="none" />
+
+    <!-- Noda Plak Kuning/Cokelat Muda -->
+    <ellipse cx="64" cy="154" rx="12" ry="16" fill="#FDE68A" opacity="0.85" />
+    <circle cx="170" cy="162" r="10" fill="#FDE68A" opacity="0.85" />
+
+    <!-- Plester Luka (Band-Aid) di Kening Kiri -->
+    <g transform="rotate(-22 72 62)">
+      <rect x="50" y="53" width="44" height="18" rx="9" fill="#FCA5A5" stroke="#DC2626" stroke-width="2.5" />
+      <rect x="65" y="53" width="14" height="18" fill="#FEE2E2" stroke="#DC2626" stroke-width="2" />
+      <circle cx="57" cy="59" r="1.5" fill="#DC2626" />
+      <circle cx="57" cy="65" r="1.5" fill="#DC2626" />
+      <circle cx="87" cy="59" r="1.5" fill="#DC2626" />
+      <circle cx="87" cy="65" r="1.5" fill="#DC2626" />
+    </g>
+
+    <!-- Alis Menurun Sedih / Kesakitan -->
+    <path d="M68 92 Q82 82 98 86" stroke="#132A4A" stroke-width="5" stroke-linecap="round" fill="none" transform="rotate(-14 83 88)" />
+    <path d="M142 86 Q158 82 172 92" stroke="#132A4A" stroke-width="5" stroke-linecap="round" fill="none" transform="rotate(14 157 88)" />
+
+    <!-- Mata Berkaca-kaca Sedih -->
+    <g>
+      <!-- Mata Kiri -->
+      <circle cx="86" cy="105" r="11.5" fill="#132A4A" />
+      <circle cx="82" cy="101" r="4" fill="#FFFFFF" />
+      <circle cx="90" cy="109" r="2.2" fill="#FFFFFF" />
+      <!-- Genangan Air Mata Bawah Mata Kiri -->
+      <path d="M74 113 Q86 120 98 113" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" fill="none" />
+
+      <!-- Mata Kanan -->
+      <circle cx="154" cy="105" r="11.5" fill="#132A4A" />
+      <circle cx="150" cy="101" r="4" fill="#FFFFFF" />
+      <circle cx="158" cy="109" r="2.2" fill="#FFFFFF" />
+      <!-- Genangan Air Mata Bawah Mata Kanan -->
+      <path d="M142 113 Q154 120 166 113" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" fill="none" />
+    </g>
+
+    <!-- Tetesan Air Mata Biru Mengalir di Pipi -->
+    <path
+      d="M72 118 C66 128 66 138 72 142 C78 146 84 138 80 128 Z"
+      fill="#38BDF8"
+      stroke="#0284C7"
+      stroke-width="2"
+    />
+    <path
+      d="M168 118 C174 128 174 138 168 142 C162 146 156 138 160 128 Z"
+      fill="#38BDF8"
+      stroke="#0284C7"
+      stroke-width="2"
+    />
+
+    <!-- Mulut Melengkung Sedih & Gemetar -->
+    <path
+      d="M92 150 Q120 126 148 150"
+      stroke="#132A4A"
+      stroke-width="6.5"
+      stroke-linecap="round"
+      fill="none"
+    />
+    <!-- Kerutan Dagu Sedih -->
+    <path
+      d="M112 158 Q120 153 128 158"
+      stroke="#132A4A"
+      stroke-width="3.5"
+      stroke-linecap="round"
+      fill="none"
+      opacity="0.6"
+    />
+  </g>
+</svg>

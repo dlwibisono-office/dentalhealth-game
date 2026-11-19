@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <radialGradient id="happyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#86EFAC" stop-opacity="0.7" />
+      <stop offset="65%" stop-color="#DCFCE7" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#DCFCE7" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="happyToothBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F0F9FF" />
+    </linearGradient>
+    <filter id="softShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#15803D" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- Aura Bersinar Hijau Sehat -->
+  <circle cx="120" cy="120" r="108" fill="url(#happyGlow)" />
+
+  <!-- Bintang & Kilau Sehat di Sekeliling Gigi -->
+  <g fill="#FACC15" stroke="#CA8A04" stroke-width="2" stroke-linejoin="round">
+    <!-- Bintang Kiri Atas -->
+    <polygon points="36,38 41,50 54,52 44,60 47,72 36,65 25,72 28,60 18,52 31,50" />
+    <!-- Bintang Kanan Atas -->
+    <polygon points="202,34 206,44 217,45 209,52 211,62 202,57 193,62 195,52 187,45 198,44" />
+  </g>
+  <!-- Sparkle Empat Sudut -->
+  <path d="M206 146 Q206 160 220 160 Q206 160 206 174 Q206 160 192 160 Q206 160 206 146 Z" fill="#22C55E" />
+  <path d="M30 148 Q30 158 40 158 Q30 158 30 168 Q30 158 20 158 Q30 158 30 148 Z" fill="#38BDF8" />
+
+  <!-- Grup Utama Gigi Senang -->
+  <g filter="url(#softShadow)">
+    <!-- Tangan Kiri & Kanan Ceria (Thumbs Up / Sorak) -->
+    <path d="M48 128 Q20 105 28 82" stroke="#16A34A" stroke-width="8" stroke-linecap="round" fill="none" />
+    <circle cx="28" cy="80" r="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="4" />
+
+    <path d="M192 128 Q220 105 212 82" stroke="#16A34A" stroke-width="8" stroke-linecap="round" fill="none" />
+    <circle cx="212" cy="80" r="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="4" />
+
+    <!-- Badan Gigi Putih Bersih & Kuat -->
+    <path
+      d="M120 44
+         C86 44 48 34 38 76
+         C28 118 50 152 58 198
+         C63 224 84 226 95 196
+         C103 174 111 164 120 164
+         C129 164 137 174 145 196
+         C156 226 177 224 182 198
+         C190 152 212 118 202 76
+         C192 34 154 44 120 44 Z"
+      fill="url(#happyToothBody)"
+      stroke="#16A34A"
+      stroke-width="7"
+      stroke-linejoin="round"
+    />
+
+    <!-- Efek Kilau Email Gigi -->
+    <path d="M62 70 Q54 92 60 114" stroke="#BAE6FD" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.85" />
+    <circle cx="67" cy="57" r="5" fill="#BAE6FD" opacity="0.85" />
+    <path d="M174 58 Q182 66 178 78" stroke="#DCFCE7" stroke-width="6" stroke-linecap="round" fill="none" />
+
+    <!-- Mahkota / Bintang Kecil Kesehatan di Atas Kepala Gigi -->
+    <path d="M120 16 L126 30 L141 32 L130 42 L133 56 L120 49 L107 56 L110 42 L99 32 L114 30 Z" fill="#FACC15" stroke="#CA8A04" stroke-width="3" stroke-linejoin="round" />
+
+    <!-- Pipi Merona Bahagia -->
+    <ellipse cx="74" cy="124" rx="14" ry="8" fill="#FB7185" opacity="0.65" />
+    <ellipse cx="166" cy="124" rx="14" ry="8" fill="#FB7185" opacity="0.65" />
+
+    <!-- Mata Bulat Berbinar Ceria -->
+    <g>
+      <!-- Mata Kiri -->
+      <circle cx="86" cy="100" r="12" fill="#132A4A" />
+      <circle cx="82" cy="95" r="4.5" fill="#FFFFFF" />
+      <circle cx="91" cy="105" r="2" fill="#FFFFFF" />
+      <!-- Alis Ceria Kiri -->
+      <path d="M72 82 Q86 74 98 82" stroke="#132A4A" stroke-width="4.5" stroke-linecap="round" fill="none" />
+
+      <!-- Mata Kanan -->
+      <circle cx="154" cy="100" r="12" fill="#132A4A" />
+      <circle cx="150" cy="95" r="4.5" fill="#FFFFFF" />
+      <circle cx="159" cy="105" r="2" fill="#FFFFFF" />
+      <!-- Alis Ceria Kanan -->
+      <path d="M142 82 Q154 74 168 82" stroke="#132A4A" stroke-width="4.5" stroke-linecap="round" fill="none" />
+    </g>
+
+    <!-- Mulut Tersenyum Lebar & Ceria -->
+    <path
+      d="M90 120 Q120 130 150 120 Q146 156 120 156 Q94 156 90 120 Z"
+      fill="#132A4A"
+      stroke="#132A4A"
+      stroke-width="4"
+      stroke-linejoin="round"
+    />
+    <!-- Lidah Pink Lucu -->
+    <path
+      d="M101 142 Q120 130 139 142 Q132 155 120 155 Q108 155 101 142 Z"
+      fill="#FB7185"
+    />
+
+    <!-- Lencana Hati / Perisai Sehat di Dada -->
+    <path
+      d="M120 182
+         C120 182 106 172 106 163
+         C106 158 110 154 115 154
+         C118 154 120 156 120 158
+         C120 156 122 154 125 154
+         C130 154 134 158 134 163
+         C134 172 120 182 120 182 Z"
+      fill="#22C55E"
+      opacity="0.25"
+    />
+  </g>
+</svg>
