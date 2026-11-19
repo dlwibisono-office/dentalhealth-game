@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Audio Backsound Musik -->
+  <audio id="bg-music" src="assets/backsound.mp3" loop preload="auto"></audio>
+
   <!-- Kanvas Confetti untuk Perayaan Jawaban Benar & Pemenang -->
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
@@ -50,7 +53,11 @@
         <span aria-hidden="true">🔄</span>
         <span class="util-label">Ulangi</span>
       </button>
-      <button type="button" id="btn-sound-toggle" class="util-btn active" title="Suara ON/OFF (Shortcut: M)" aria-label="Suara Aktif" aria-pressed="true">
+      <button type="button" id="btn-music-toggle" class="util-btn active" title="Musik Backsound ON/OFF (Shortcut: B)" aria-label="Musik Backsound Aktif" aria-pressed="true">
+        <span id="music-icon" aria-hidden="true">🎵</span>
+        <span id="music-label" class="util-label">Musik: ON</span>
+      </button>
+      <button type="button" id="btn-sound-toggle" class="util-btn active" title="Efek Suara ON/OFF (Shortcut: M)" aria-label="Suara Aktif" aria-pressed="true">
         <span id="sound-icon" aria-hidden="true">🔊</span>
         <span id="sound-label" class="util-label">Suara: ON</span>
       </button>

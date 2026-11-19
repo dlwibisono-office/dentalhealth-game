@@ -114,9 +114,90 @@
   const MAX_PLAYERS = 3;
   const POINTS_PER_CORRECT = 10;
   const STORAGE_KEY_SOUND = "dentalGameSoundEnabled";
+  const STORAGE_KEY_MUSIC = "dentalGameMusicEnabled";
 
   /* ==========================================================================
-     2. MODUL SOUND EFFECT (WEB AUDIO API SYNTHESIZER)
+     2A. MODUL BACKSOUND MUSIC (HTML5 AUDIO)
+     ========================================================================== */
+  const BackgroundMusic = (() => {
+    const audioEl = document.getElementById("bg-music");
+    let musicEnabled = true;
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_MUSIC);
+      if (saved !== null) {
+        musicEnabled = saved === "true";
+      }
+    } catch (_) {}
+
+    if (audioEl) {
+      audioEl.volume = 0.45;
+      audioEl.loop = true;
+    }
+
+    function tryPlay() {
+      if (!audioEl || !musicEnabled) return;
+      audioEl.muted = false;
+      const playPromise = audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay diblokir browser hingga ada interaksi pertama pengguna
+        });
+      }
+    }
+
+    function pause() {
+      if (!audioEl) return;
+      audioEl.pause();
+    }
+
+    // Aktifkan pemutaran otomatis saat halaman dimuat atau interaksi pertama pengguna
+    function setupAutoplayUnlock() {
+      const unlockEvents = ["pointerdown", "keydown", "touchstart", "click"];
+      function unlock() {
+        if (musicEnabled && audioEl && audioEl.paused) {
+          tryPlay();
+        }
+        if (audioEl && !audioEl.paused) {
+          unlockEvents.forEach((evt) => window.removeEventListener(evt, unlock));
+        }
+      }
+      unlockEvents.forEach((evt) => window.addEventListener(evt, unlock, { passive: true }));
+    }
+
+    setupAutoplayUnlock();
+
+    return {
+      isEnabled() {
+        return musicEnabled;
+      },
+
+      init() {
+        if (musicEnabled) {
+          tryPlay();
+        } else {
+          pause();
+        }
+      },
+
+      toggle() {
+        musicEnabled = !musicEnabled;
+        try {
+          localStorage.setItem(STORAGE_KEY_MUSIC, String(musicEnabled));
+        } catch (_) {}
+
+        if (musicEnabled) {
+          tryPlay();
+        } else {
+          pause();
+        }
+        return musicEnabled;
+      }
+    };
+  })();
+
+  /* ==========================================================================
+     2B. MODUL SOUND EFFECT (WEB AUDIO API SYNTHESIZER)
      ========================================================================== */
   const SoundFX = (() => {
     let audioCtx = null;
@@ -376,6 +457,9 @@
 
     podiumGrid: document.getElementById("podium-grid"),
 
+    btnMusicToggle: document.getElementById("btn-music-toggle"),
+    musicIcon: document.getElementById("music-icon"),
+    musicLabel: document.getElementById("music-label"),
     btnSoundToggle: document.getElementById("btn-sound-toggle"),
     soundIcon: document.getElementById("sound-icon"),
     soundLabel: document.getElementById("sound-label"),
@@ -804,8 +888,17 @@
   }
 
   /* ==========================================================================
-     11. FULLSCREEN FOKUS BERSIH (CLEAN MODE) & KONTROL SUARA
+     11. FULLSCREEN FOKUS BERSIH (CLEAN MODE) & KONTROL SUARA / MUSIK
      ========================================================================== */
+  function updateMusicUI() {
+    if (!dom.btnMusicToggle) return;
+    const enabled = BackgroundMusic.isEnabled();
+    dom.btnMusicToggle.classList.toggle("active", enabled);
+    dom.btnMusicToggle.setAttribute("aria-pressed", String(enabled));
+    dom.musicIcon.textContent = enabled ? "🎵" : "🔇";
+    dom.musicLabel.textContent = enabled ? "Musik: ON" : "Musik: OFF";
+  }
+
   function updateSoundUI() {
     const enabled = SoundFX.isEnabled();
     dom.btnSoundToggle.classList.toggle("active", enabled);
@@ -967,6 +1060,14 @@
       showScreen("players");
     });
 
+    if (dom.btnMusicToggle) {
+      dom.btnMusicToggle.addEventListener("click", () => {
+        SoundFX.click();
+        BackgroundMusic.toggle();
+        updateMusicUI();
+      });
+    }
+
     dom.btnSoundToggle.addEventListener("click", () => {
       SoundFX.toggle();
       updateSoundUI();
@@ -985,6 +1086,11 @@
       } else if (e.key === "f" || e.key === "F") {
         e.preventDefault();
         toggleFullscreen();
+      } else if (e.key === "b" || e.key === "B") {
+        e.preventDefault();
+        SoundFX.click();
+        BackgroundMusic.toggle();
+        updateMusicUI();
       } else if (e.key === "m" || e.key === "M") {
         e.preventDefault();
         SoundFX.toggle();
@@ -1016,7 +1122,9 @@
      ========================================================================== */
   function init() {
     setPlayerCount(1); // Default adalah 1 pemain
+    updateMusicUI();
     updateSoundUI();
+    BackgroundMusic.init();
     initCardDragAndDrop();
     bindEvents();
   }
