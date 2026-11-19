@@ -9,7 +9,7 @@
   "use strict";
 
   /* ==========================================================================
-     1. BANK PERTANYAAN (12 KARTU MAKANAN & MINUMAN EDUKATIF)
+     1. BANK PERTANYAAN (30 KARTU MAKANAN & MINUMAN EDUKATIF)
      ========================================================================== */
   const QUESTION_BANK = [
     {
@@ -107,10 +107,154 @@
       answer: "DONT",
       explanation:
         "Permen lengket sangat mudah menempel lama di lekukan gigi geraham dan sulit dibersihkan hanya dengan berkumur."
+    },
+    {
+      id: 13,
+      name: "Keju",
+      emoji: "🧀",
+      answer: "DO",
+      explanation:
+        "Keju kaya akan kalsium dan fosfor yang membantu memperkuat lapisan pelindung (email) gigi serta menyeimbangkan keasaman di mulut."
+    },
+    {
+      id: 14,
+      name: "Brokoli",
+      emoji: "🥦",
+      answer: "DO",
+      explanation:
+        "Brokoli merupakan sayuran hijau kaya kalsium, vitamin, dan serat alami yang membantu menjaga kebersihan gigi serta kesehatan gusi."
+    },
+    {
+      id: 15,
+      name: "Ikan",
+      emoji: "🐟",
+      answer: "DO",
+      explanation:
+        "Ikan mengandung vitamin D dan fosfor tinggi yang penting agar tubuh dapat menyerap kalsium secara optimal untuk gigi yang kuat."
+    },
+    {
+      id: 16,
+      name: "Yogurt tawar",
+      emoji: "🥣",
+      answer: "DO",
+      explanation:
+        "Yogurt tanpa tambahan gula mengandung kalsium, protein, dan bakteri baik (probiotik) yang mendukung kesehatan gusi dan gigi."
+    },
+    // {
+    //   id: 17,
+    //   name: "Seledri",
+    //   emoji: "🥬",
+    //   answer: "DO",
+    //   explanation:
+    //     "Sayuran berserat dan renyah seperti seledri membutuhkan kunyahan ekstra yang merangsang air liur untuk membersihkan sisa makanan."
+    // },
+    {
+      id: 18,
+      name: "Stroberi segar",
+      emoji: "🍓",
+      answer: "DO",
+      explanation:
+        "Buah stroberi segar kaya akan vitamin C dan antioksidan yang membantu pembentukan kolagen agar gusi tetap sehat dan kuat."
+    },
+    // {
+    //   id: 19,
+    //   name: "Kacang almond",
+    //   emoji: "🥜",
+    //   answer: "DO",
+    //   explanation:
+    //     "Kacang almond rendah gula serta kaya kalsium dan protein yang baik untuk memperkuat struktur gigi. Kunyah perlahan ya!"
+    // },
+    {
+      id: 20,
+      name: "Timun segar",
+      emoji: "🥒",
+      answer: "DO",
+      explanation:
+        "Timun mengandung banyak air dan serat renyah yang membantu menyegarkan mulut serta membersihkan sisa makanan di permukaan gigi."
+    },
+    {
+      id: 21,
+      name: "Bayam",
+      emoji: "🌿",
+      answer: "DO",
+      explanation:
+        "Sayuran hijau seperti bayam kaya akan kalsium, asam folat, dan mineral penting yang membantu memperkuat gigi serta merawat gusi."
+    },
+    {
+      id: 22,
+      name: "Es krim manis",
+      emoji: "🍦",
+      answer: "DONT",
+      explanation:
+        "Es krim mengandung gula tinggi yang mudah menempel di gigi. Jika dikonsumsi berlebihan tanpa sikat gigi, bakteri akan menghasilkan asam."
+    },
+    {
+      id: 23,
+      name: "Kue tart manis",
+      emoji: "🍰",
+      answer: "DONT",
+      explanation:
+        "Kue tart dengan krim manis mengandung banyak gula dan tepung halus yang mudah menempel di sela-sela gigi."
+    },
+    {
+      id: 24,
+      name: "Keripik kemasan",
+      emoji: "🍟",
+      answer: "DONT",
+      explanation:
+        "Keripik tinggi pati mudah hancur menjadi remah halus yang terselip lama di sela-sela gigi dan diubah bakteri menjadi asam."
+    },
+    {
+      id: 25,
+      name: "Biskuit krim manis",
+      emoji: "🍪",
+      answer: "DONT",
+      explanation:
+        "Biskuit manis mudah menempel di lekukan gigi geraham saat dikunyah, sehingga memicu pertumbuhan bakteri penyebab gigi berlubang."
+    },
+    {
+      id: 26,
+      name: "Minuman boba manis",
+      emoji: "🧋",
+      answer: "DONT",
+      explanation:
+        "Minuman boba umumnya mengandung gula cair yang sangat tinggi serta bola tapioka kenyal yang mudah terselip di gigi."
+    },
+    {
+      id: 27,
+      name: "Gulali / Permen kapas",
+      emoji: "🍡",
+      answer: "DONT",
+      explanation:
+        "Gulali terbuat hampir seluruhnya dari gula murni yang langsung larut menjadi lengket di seluruh permukaan gigi."
+    },
+    {
+      id: 28,
+      name: "Sirup manis",
+      emoji: "🍹",
+      answer: "DONT",
+      explanation:
+        "Sirup manis mengandung kadar gula tinggi yang melapisi permukaan gigi dan mempercepat terbentuknya plak serta asam."
+    },
+    {
+      id: 29,
+      name: "Karamel lengket",
+      emoji: "🍮",
+      answer: "DONT",
+      explanation:
+        "Karamel memiliki tekstur sangat lengket dan tinggi gula sehingga sulit dibersihkan oleh air liur dan bertahan lama di permukaan gigi."
+    },
+    {
+      id: 30,
+      name: "Roti selai cokelat",
+      emoji: "🥐",
+      answer: "DONT",
+      explanation:
+        "Roti manis dengan selai cokelat tinggi gula mudah menempel di sela gigi. Jangan lupa minum air putih dan sikat gigi ya!"
     }
   ];
 
-  const TOTAL_QUESTIONS = QUESTION_BANK.length; // Selalu tampilkan seluruh 12 pertanyaan
+  const TOTAL_QUESTIONS = 10; // Hanya tampilkan 10 pertanyaan secara acak dari 30 bank soal
   const MAX_PLAYERS = 3;
   const POINTS_PER_CORRECT = 10;
   const STORAGE_KEY_SOUND = "dentalGameSoundEnabled";
@@ -479,6 +623,18 @@
     return copy;
   }
 
+  function buildBalancedRandomDeck() {
+    const countPerCategory = Math.floor(TOTAL_QUESTIONS / 2); // 5 DO & 5 DONT
+    const doCards = shuffleDeck(
+      QUESTION_BANK.filter((item) => item.answer === "DO")
+    ).slice(0, countPerCategory);
+    const dontCards = shuffleDeck(
+      QUESTION_BANK.filter((item) => item.answer === "DONT")
+    ).slice(0, TOTAL_QUESTIONS - countPerCategory);
+
+    return shuffleDeck([...doCards, ...dontCards]);
+  }
+
   function escapeHTML(str) {
     const div = document.createElement("div");
     div.textContent = str;
@@ -494,12 +650,14 @@
     dom.turnModal.classList.add("hidden");
   }
 
-  function getQuestionsPerPlayer() {
-    return Math.floor(TOTAL_QUESTIONS / state.playerCount);
+  function getQuestionsPerPlayer(playerIndex = state.currentPlayerIndex) {
+    const base = Math.floor(TOTAL_QUESTIONS / state.playerCount);
+    const remainder = TOTAL_QUESTIONS % state.playerCount;
+    return base + (playerIndex < remainder ? 1 : 0);
   }
 
-  function getHeroTitle(score) {
-    const maxScore = getQuestionsPerPlayer() * POINTS_PER_CORRECT;
+  function getHeroTitle(score, playerIndex = 0) {
+    const maxScore = getQuestionsPerPlayer(playerIndex) * POINTS_PER_CORRECT;
     const ratio = maxScore > 0 ? score / maxScore : 0;
     if (ratio >= 1) return "SUPER DENTAL HERO!";
     if (ratio >= 0.75) return "GIGI HEBAT!";
@@ -513,7 +671,7 @@
   function setPlayerCount(count) {
     const validCount = Math.max(1, Math.min(MAX_PLAYERS, Number(count) || 1));
     state.playerCount = validCount;
-    const qPerPlayer = getQuestionsPerPlayer();
+    const qPerPlayer = getQuestionsPerPlayer(0);
 
     // Update tombol jumlah pemain aktif
     document.querySelectorAll(".count-btn").forEach((btn) => {
@@ -530,12 +688,15 @@
       }
     }
 
-    // Update teks informasi sesuai jumlah pemain (selalu total 12 kartu)
+    // Update teks informasi sesuai jumlah pemain (selalu 10 kartu acak dari 30 bank soal)
     if (validCount === 1) {
-      dom.playersSubtitle.textContent = `Mode 1 Pemain: Jawab seluruh ${TOTAL_QUESTIONS} kartu makanan untuk meraih gelar Pahlawan Gigi Sehat!`;
+      dom.playersSubtitle.textContent = `Mode 1 Pemain: Jawab ${TOTAL_QUESTIONS} kartu makanan acak dari ${QUESTION_BANK.length} bank soal untuk meraih gelar Pahlawan Gigi Sehat!`;
       dom.btnStartRoundLabel.textContent = "MULAI PERMAINAN";
+    } else if (TOTAL_QUESTIONS % validCount === 0) {
+      dom.playersSubtitle.textContent = `${validCount} Peserta bermain bergantian menjawab ${TOTAL_QUESTIONS} kartu acak (masing-masing ${qPerPlayer} kartu!)`;
+      dom.btnStartRoundLabel.textContent = "MULAI ROUND 1";
     } else {
-      dom.playersSubtitle.textContent = `${validCount} Peserta bermain bergantian menjawab seluruh ${TOTAL_QUESTIONS} kartu (masing-masing ${qPerPlayer} kartu!)`;
+      dom.playersSubtitle.textContent = `${validCount} Peserta bermain bergantian menjawab total ${TOTAL_QUESTIONS} kartu makanan secara acak!`;
       dom.btnStartRoundLabel.textContent = "MULAI ROUND 1";
     }
   }
@@ -568,7 +729,7 @@
   }
 
   function buildProgressDotsDOM() {
-    const qPerPlayer = getQuestionsPerPlayer();
+    const qPerPlayer = getQuestionsPerPlayer(state.currentPlayerIndex);
     dom.hudRoundDots.innerHTML = "";
     for (let i = 0; i < qPerPlayer; i++) {
       const dot = document.createElement("span");
@@ -580,8 +741,8 @@
   function startNewGameSession() {
     readPlayerSetupInputs();
 
-    // Selalu tampilkan seluruh 12 kartu pertanyaan yang tersedia secara acak
-    state.deck = shuffleDeck(QUESTION_BANK);
+    // Ambil 10 kartu pertanyaan secara acak dengan komposisi seimbang: 5 DO & 5 DON'T
+    state.deck = buildBalancedRandomDeck();
 
     state.currentPlayerIndex = 0;
     state.currentQuestionInRound = 0;
@@ -629,7 +790,7 @@
   function renderCurrentQuestion() {
     const activePlayer = state.players[state.currentPlayerIndex];
     const currentCard = state.deck[state.globalQuestionIndex];
-    const qPerPlayer = getQuestionsPerPlayer();
+    const qPerPlayer = getQuestionsPerPlayer(state.currentPlayerIndex);
 
     // Update HUD Header
     dom.hudOverallProgress.textContent = `Kartu ${state.globalQuestionIndex + 1} / ${state.deck.length}`;
@@ -729,20 +890,24 @@
     SoundFX.click();
     dom.feedbackModal.classList.add("hidden");
 
+    const currentPlayerQuota = getQuestionsPerPlayer(state.currentPlayerIndex);
     state.globalQuestionIndex += 1;
     state.currentQuestionInRound += 1;
 
-    // Cek apakah seluruh 12 kartu sesi ini telah selesai dijawab
+    // Cek apakah seluruh 10 kartu sesi ini telah selesai dijawab
     if (state.globalQuestionIndex >= state.deck.length) {
       showFinalResults();
       return;
     }
 
     // Cek apakah pemain saat ini sudah menyelesaikan jatah pertanyaannya
-    const qPerPlayer = getQuestionsPerPlayer();
-    if (state.currentQuestionInRound >= qPerPlayer) {
+    if (
+      state.currentQuestionInRound >= currentPlayerQuota &&
+      state.currentPlayerIndex < state.playerCount - 1
+    ) {
       state.currentPlayerIndex += 1;
       state.currentQuestionInRound = 0;
+      buildProgressDotsDOM();
       showTurnTransitionModal();
       return;
     }
@@ -753,7 +918,7 @@
   function showTurnTransitionModal() {
     const nextPlayer = state.players[state.currentPlayerIndex];
     const roundNumber = state.currentPlayerIndex + 1;
-    const qPerPlayer = getQuestionsPerPlayer();
+    const qPerPlayer = getQuestionsPerPlayer(state.currentPlayerIndex);
 
     SoundFX.nextTurn();
     dom.turnRoundBadge.textContent = `RONDE ${roundNumber} DARI ${state.playerCount}`;
@@ -791,7 +956,7 @@
       const card = document.createElement("div");
       card.className = `podium-card ${idx === 0 ? "rank-1" : ""}`;
 
-      const heroTitle = getHeroTitle(player.score);
+      const heroTitle = getHeroTitle(player.score, player.originalIdx);
 
       card.innerHTML = `
         <div class="rank-medal">${medals[idx] || "🏅 PESERTA"}</div>
